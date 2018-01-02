@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    
+
+    
+
+    
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="true">
+    <meta name="baidu-site-verification" content="97dbRVWfVh" />
+    <meta name="sogou_site_verification" content="AIePRXkUI4"/>
+    
+    
+    <link rel="canonical" href="http://www.kotlinandroid.net/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI">
+    
+    
+    <title>Putty+Xming在Windows端显示Linux图形化界面GUI | ITGOYO技术站 | 一个专注发布技术相关与优秀文章的技术网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="一、Linux配置#apt-get install openssh-server 二、Windows下载并安装Xming客户端http://sourceforge.net/projects/xming 完了之后出现sshd的字样表明服务器开启成功。 安装并启动， 无需配置下载并安装puttyhttp://the.earth.li/~sgtatham/putty/latest/x86/putty.e">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Putty+Xming在Windows端显示Linux图形化界面GUI">
+<meta property="og:url" content="https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI">
+<meta property="og:site_name" content="ITGOYO技术站">
+<meta property="og:description" content="一、Linux配置#apt-get install openssh-server 二、Windows下载并安装Xming客户端http://sourceforge.net/projects/xming 完了之后出现sshd的字样表明服务器开启成功。 安装并启动， 无需配置下载并安装puttyhttp://the.earth.li/~sgtatham/putty/latest/x86/putty.e">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/62626614.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/90740534.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/13122657.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/458619.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/84274553.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/70170489.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/8035428.jpg">
+<meta property="og:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/88604763.jpg">
+<meta property="og:image" content="https://itgoyo.github.io/assets/getqrcode.jpeg">
+<meta property="og:updated_time" content="2018-01-01T14:56:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Putty+Xming在Windows端显示Linux图形化界面GUI">
+<meta name="twitter:description" content="一、Linux配置#apt-get install openssh-server 二、Windows下载并安装Xming客户端http://sourceforge.net/projects/xming 完了之后出现sshd的字样表明服务器开启成功。 安装并启动， 无需配置下载并安装puttyhttp://the.earth.li/~sgtatham/putty/latest/x86/putty.e">
+<meta name="twitter:image" content="http://omvbl46i3.bkt.clouddn.com/17-11-5/62626614.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="ITGOYO技术站" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/kotlin.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.5.2">
+    <script>window.lazyScripts=[]</script>
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c16d3c10c9ea6c6fe749d9926d52b0d6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" style="
+    width: 300px;"class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand" style="
+          width: 300px;">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/kotlin_250x250.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">itgoyo</h5>
+          <a href="mailto:itgoyo@gmail.com" title="itgoyo@gmail.com" class="mail">itgoyo@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col" style="
+        width: 300px;">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies"  >
+                <i class="icon icon-lg icon-film"></i>
+                电影
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.instagram.com/itgoyo1991/"  >
+                <i class="icon icon-lg icon-photo"></i>
+                相册
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="Mailto:itgoyo@kotlinandroid.net"  >
+                <i class="icon icon-lg icon-envelope"></i>
+                邮件
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.kotlinandroid.net/timeline"  >
+                <i class="icon icon-lg icon-calendar"></i>
+                时间轴
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/itgoyo"  >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.kotlinandroid.net/resume"  >
+                <i class="icon icon-lg icon-file-text"></i>
+                Résumé
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://hukai.me/android-training-course-in-chinese/index.html"  >
+                <i class="icon icon-lg icon-android"></i>
+                官方培训课程
+              </a>
+            </li>
+        
+
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=270 src="https://music.163.com/outchain/player?type=0&id=120897804&auto=1&height=430"></iframe>
+
+        <div class="div_right_bottom" align="center">
+          <img src="/assets/getqrcode.jpeg">
+          微信公众号
+          </div>
+
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Putty+Xming在Windows端显示Linux图形化界面GUI</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Putty+Xming在Windows端显示Linux图形化界面GUI</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-06T01:19:04.000Z" itemprop="datePublished" class="page-time">
+  2017-11-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、Linux配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、Linux配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、Windows"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、Windows</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、配置Putty"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、配置Putty</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#首先获取Linux服务器的ip地址"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">首先获取Linux服务器的ip地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#填写配置信息"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">填写配置信息</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Putty-Xming在Windows端显示Linux图形化界面GUI"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Putty+Xming在Windows端显示Linux图形化界面GUI</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-06 09:19:04" datetime="2017-11-06T01:19:04.000Z"  itemprop="datePublished">2017-11-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、Linux配置"><a href="#一、Linux配置" class="headerlink" title="一、Linux配置"></a>一、Linux配置</h3><p>#apt-get install openssh-server</p>
+<h3 id="二、Windows"><a href="#二、Windows" class="headerlink" title="二、Windows"></a>二、Windows</h3><p>下载并安装Xming客户端<br><a href="http://sourceforge.net/projects/xming" target="_blank" rel="external">http://sourceforge.net/projects/xming</a></p>
+<p>完了之后出现sshd的字样表明服务器开启成功。</p>
+<p>安装并启动， 无需配置<br>下载并安装putty<br><a href="http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe" target="_blank" rel="external">http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe</a></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/62626614.jpg" alt=""></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/90740534.jpg" alt=""></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/13122657.jpg" alt=""></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/458619.jpg" alt=""></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/84274553.jpg" alt=""></p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/70170489.jpg" alt=""></p>
+<h3 id="三、配置Putty"><a href="#三、配置Putty" class="headerlink" title="三、配置Putty"></a>三、配置Putty</h3><h4 id="首先获取Linux服务器的ip地址"><a href="#首先获取Linux服务器的ip地址" class="headerlink" title="首先获取Linux服务器的ip地址"></a>首先获取Linux服务器的ip地址</h4><p>在终端输入: ifconfig 即可查看。</p>
+<h4 id="填写配置信息"><a href="#填写配置信息" class="headerlink" title="填写配置信息"></a>填写配置信息</h4><p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/8035428.jpg" alt=""></p>
+<p>Putty中开启X11支持</p>
+<p><img src="http://omvbl46i3.bkt.clouddn.com/17-11-5/88604763.jpg" alt=""></p>
+<p>Linux里边的ssh文件配置也要打开</p>
+<p>要允许Linux主机上的SSH X转发，查看 /etc/ssh/sshd_config 文件，加入以下一行，</p>
+<p>X11Forwrding yes</p>
+<p>到此配置就结束了，想要测试是否成功的话，可以在终端输入:xclock</p>
+<p>如果出现一个悬浮的时钟则表明配置成功了，或者你可以打开Linux上面的一张图片如果显示也代表成功了，命令如下</p>
+<p>eog xxx.jpg</p>
+<hr>
+<div align="center"><br>欢迎关注我的 Github：itgoyo<br><br><br>发现更多有趣好玩的，欢迎关注我的微信公众号<br><br><img src="/assets/getqrcode.jpeg" alt=""><br></div>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-01-01T14:56:46.000Z" itemprop="dateUpdated">2018-01-01 22:56:46</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://itgoyo.github.io">
+            <img src="/img/kotlin_250x250.png" alt="itgoyo">
+            itgoyo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&title=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&pic=https://itgoyo.github.io/img/kotlin_250x250.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&title=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&source=talk is cheap,show me the girl." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&via=https://itgoyo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/07/凭什么我要给你钱" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">凭什么我要给你钱</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/03/Oh-My-Zsh" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Oh-My-Zsh</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'itgoyo';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <!-- <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script> -->
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'itgoyo',
+            repo: 'itgoyo.github.io',
+            oauth: {
+                client_id: '464e7c112346fd6daabb',
+                client_secret: '3f78aa47b168a9788b888238a610dff1ac6e51ac',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        奖励一杯咖啡!
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/assets/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/assets/img/wechat.jpg" data-alipay="/assets/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+
+    <div class="bottom">
+  
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span>itgoyo &copy; 2017 - 2018</span>  &nbsp&nbsp&nbsp 作者Github地址 欢迎关注 <a href="https://github.com/itgoyo" target="_blank">itgoyo</a>
+              <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a>
+        </p>
+        <p>
+        感谢西部数码提供<a href="http://www.west.cn/index.asp?ReferenceID=1232730"
+        target="_blank">虚拟主机</a>
+        </p>
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&title=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&pic=https://itgoyo.github.io/img/kotlin_250x250.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&title=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&source=talk is cheap,show me the girl." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Putty+Xming在Windows端显示Linux图形化界面GUI》 — ITGOYO技术站&url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI&via=https://itgoyo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://itgoyo.github.io/2017/11/06/Putty-Xming在Windows端显示Linux图形化界面GUI" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKElEQVR42u3a0U7rQAwEUP7/p3tfrwSUGTuVmu3JEyrRNmcjYezZr6/4eny7/v/8+z3ff5us/9s3/nbnb/dcdmFjY2PfhP14eiXsfFPyn/MtSJ7nh5WxsbGxj2M/LyrPHy5ZoS1Xz+9JNvqPJ8HGxsb+eHa7KW0RalfGxsbGxr6K3Y6ENgMjbGxsbOz9v/iz8CD5vB0evXCWho2Njf327DaIfeefX5JvY2NjY78x+1FeeVGZRcj7uDdSYGNjYx/EzgtAvgWzYdBspJW3GdjY2NhnszfxagtIDu7kAUM73sLGxsY+j92OaV4x4m8j3jZmXr1hbGxs7Juw23FPOxjKvyVvdfLG5tfeCxsbG/sI9ubITts2zH67CRKG7xwbGxv7VuxNTNsGru2am0alnp9hY2NjH8GeBQOzk435EZz24E40CMPGxsY+lJ23E+1XzoZHs4oTtS7Y2NjYB7E3Rx5b5P7o5H6AhY2NjX0q+3Ux7axQJdux2ThsbGzsk9j52D0vLbOCtzmmmT9/0YFhY2Nj35y9L2Cz0HeDKVoUbGxs7IPYbYy6GdMnpat9Afma2NjY2J/DzhuDvERdtUF5ABwVLWxsbOwj2O3QZ9ZO7PPnZIuLcoiNjY39Yez9kZo8KmjHQ+1rwMbGxj6PvaHmkW07uqoLUrl92NjY2Key25i2nV0lnyeFcLMmNjY29nns9qBM3nJc1ULMooI/Xhg2Njb2QezkpryobA7ZzGLgPNIoKjY2Njb2rdj1H/3RoKctkLOGpLgHGxsb+yB2UhhmY6MWf20wUNRtbGxs7IPY+UMk4UE7ftqUtLwh+aGAYWNjYx/EvqrNaB9uM4raPDM2Njb2J7CTr7zqEE+LbKOCP0ICbGxs7NuyH+WVty5Jc5K8k7bVWfVe2NjY2Ddk51deYNqSkz/0JpbIyx42Njb2HdmzcX8eA7T4dlA1HEJhY2NjH8duC8NsTH/VEGp2RUEvNjY29sew20A3uT8fZs1eEjY2NjZ2MrLfHOKsi9CmfGJjY2Mfx56Fu/uhUtuKPF/zJfEANjY29tuz27LRHprcFLnNCnkbg42NjX1b9j8Uoysm9mQ90QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261686164&web_id=1261686164')
+
+</script>
+
+<script src="/js/main.min.js?v=1.5.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.5.2" async></script>
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
